@@ -1,0 +1,33 @@
+{
+    "name": "programic/laravel-triggers",
+    "license": "proprietary",
+    "type": "package",
+    "description": "Add mysql triggers to migration files",
+    "readme": "README.md",
+    "authors": [
+        {
+            "name": "Programic",
+            "email": "development@programic.com",
+            "homepage": "https://programic.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Programic\\Triggers\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Programic\\Triggers\\TriggerServiceProvider"
+            ]
+        }
+    }
+}

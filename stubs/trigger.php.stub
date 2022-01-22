@@ -1,0 +1,29 @@
+<?php
+
+use Programic\Tasks\Facades\Trigger;
+use Programic\Tasks\TaskMigration;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+
+class TRIGGER_NAME extends MysqlTrigger
+{
+    /**
+     * Run the task.
+     *
+     * @return void
+     */
+    public function __invoke()
+    {
+//        Trigger::onDelete()
+    }
+
+    /**
+     * Reverse the task.
+     *
+     * @return void
+     */
+    public function down()
+    {
+
+    }
+}
