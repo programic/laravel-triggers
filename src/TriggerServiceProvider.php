@@ -25,8 +25,6 @@ class TriggerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Trigger::class, fn () => new Trigger());
-//            return new Trigger();
-//        });
 
         $this->app->alias(Trigger::class, 'trigger');
     }

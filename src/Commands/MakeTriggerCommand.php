@@ -33,14 +33,18 @@ class MakeTriggerCommand extends Command
      */
     public function handle()
     {
-        $triggerName = Str::snake($this->argument('trigger'));
-        $className = Str::studly($triggerName);
-        $fileName = Carbon::now()->format('Y_m_d_His') . '_' . $triggerName . '.php';
+        $triggerName = $this->argument('trigger');
+        $fileName = $triggerName . '.php';
 
         $stub = File::get(__DIR__ . '/../../stubs/trigger.php.stub');
-        $stub = str_replace('TRIGGER_NAME', $className, $stub);
+        $stub = str_replace('TRIGGER_NAME', $triggerName, $stub);
+        $targetPath = base_path() . '/database/triggers/';
 
-        File::put(base_path() . '/database/triggers/' . $fileName, $stub);
+        if (!File::isDirectory($targetPath)) {
+            File::makeDirectory($targetPath, 0755, true, true);
+        }
+
+        File::put($targetPath . $fileName, $stub);
 
         $this->line('<info>Trigger created:</info> ' . $fileName);
     }

@@ -1,29 +1,27 @@
 <?php
 
-use Programic\Tasks\Facades\Trigger;
-use Programic\Tasks\TaskMigration;
-use Symfony\Component\Console\Output\ConsoleOutput;
+namespace Database\Triggers;
 
+use Illuminate\Support\Facades\DB;
+use Programic\Triggers\Factory;
+use Programic\Triggers\Trigger;
 
-class TRIGGER_NAME extends MysqlTrigger
+class TRIGGER_NAME extends Factory
 {
     /**
-     * Run the task.
+     * Create trigger.
      *
-     * @return void
+     * @param Trigger $trigger
+     * @return Trigger
      */
-    public function __invoke()
+    public function run(Trigger $trigger): Trigger
     {
-//        Trigger::onDelete()
-    }
-
-    /**
-     * Reverse the task.
-     *
-     * @return void
-     */
-    public function down()
-    {
-
+        return $trigger->create('')
+            ->on('')
+            ->after()
+            ->delete()
+            ->statement(function() {
+                // DB::raw('');
+            });
     }
 }
