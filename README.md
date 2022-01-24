@@ -7,10 +7,26 @@
 This package allows you to automate tasks as in migrations
 
 ### Installation
-This package requires PHP 7.2 and Laravel 5.8 or higher.
+This package requires PHP 8.0 and Laravel 7 or higher.
 
 ```
 composer require programic/laravel-triggers
+```
+
+Replace alias Schema Facade with our Facade in ``config/app.php``
+```
+'Schema' => Programic\Triggers\Facades\Schema::class,
+```
+
+Add directory to composer autoloader: ``"Database\\Seeders\\": "database/seeders/"``
+```
+"autoload": {
+    "psr-4": {
+        "App\\": "app/",
+        "Database\\Factories\\": "database/factories/",
+        "Database\\Seeders\\": "database/seeders/"
+    }
+},
 ```
 
 ### Basic Usage

@@ -16,17 +16,7 @@ class MysqlTrigger
 
     public function create(bool $ifNotExists): bool
     {
-        $expression = call_user_func($this->trigger->getStatement());
-
-        if ($expression instanceof Expression) {
-            $queryString = $expression->getValue();
-        } elseif ($expression instanceof DB) {
-            $queryString = $expression->toSql();
-        } elseif ($expression instanceof string) {
-            $queryString = $expression;
-        } else {
-            throw new \Exception('expression has wrong instance');
-        }
+        $queryString = $this->createExpression();
 
         $statementIfNotExists = ($ifNotExists) ? '[IF NOT EXISTS]' : null;
         $triggerName = $this->trigger->getName();
@@ -42,11 +32,35 @@ class MysqlTrigger
         ");
     }
 
+    public function execute()
+    {
+        $queryString = $this->createExpression();
+
+        return DB::statement($queryString);
+    }
+
     public function drop(bool $ifExists = false): bool
     {
         $statementIfExists = ($ifExists) ? '[IF EXISTS]' : null;
         $triggerName = $this->trigger->name();
 
         return DB::statement("DROP TRIGGER $statementIfExists $triggerName;");
+    }
+
+    private function createExpression(): string
+    {
+        $expression = call_user_func($this->trigger->getStatement());
+
+        if ($expression instanceof Expression) {
+            $queryString = $expression->getValue();
+        } elseif ($expression instanceof DB) {
+            $queryString = $expression->toSql();
+        } elseif ($expression instanceof string) {
+            $queryString = $expression;
+        } else {
+            throw new \Exception('expression has wrong instance');
+        }
+
+        return $queryString;
     }
 }
