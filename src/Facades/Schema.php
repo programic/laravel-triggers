@@ -3,7 +3,6 @@
 namespace Programic\Triggers\Facades;
 
 use Illuminate\Support\Facades\Schema as DefaultSchema;
-use Illuminate\Support\Arr;
 use Programic\Triggers\MysqlTrigger;
 use \Programic\Triggers\Trigger;
 
@@ -24,13 +23,20 @@ class Schema extends DefaultSchema
         return self::createTrigger($trigger, true);
     }
 
-    public static function dropTrigger(string $trigger): bool
+    public static function recreateTrigger(string $trigger, $ifExists = false): bool
     {
-        return (new MysqlTrigger((new $trigger())->run(new Trigger())))->drop();
+        self::dropTrigger($trigger, $ifExists);
+
+        return self::createTrigger($trigger);
+    }
+
+    public static function dropTrigger(string $trigger, $ifExists = false): bool
+    {
+        return (new MysqlTrigger((new $trigger())->run(new Trigger())))->drop($ifExists);
     }
 
     public static function dropTriggerIfExists(string|array $trigger): bool
     {
-        return (new MysqlTrigger((new $trigger())->run(new Trigger())))->drop(true);
+        return self::dropTrigger($trigger, true);
     }
 }

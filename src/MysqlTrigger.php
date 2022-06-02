@@ -41,8 +41,8 @@ class MysqlTrigger
 
     public function drop(bool $ifExists = false): bool
     {
-        $statementIfExists = ($ifExists) ? '[IF EXISTS]' : null;
-        $triggerName = $this->trigger->name();
+        $statementIfExists = ($ifExists) ? 'IF EXISTS' : null;
+        $triggerName = $this->trigger->getName();
 
         return DB::statement("DROP TRIGGER $statementIfExists $triggerName;");
     }
