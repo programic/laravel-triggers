@@ -7,7 +7,7 @@
 This package allows you to automate tasks as in migrations
 
 ### Installation
-This package requires PHP 8.0 and Laravel 7 or higher.
+This package requires PHP 8.1 (or higher) and Laravel 10.
 
 ```
 composer require programic/laravel-triggers
