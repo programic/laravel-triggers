@@ -2,8 +2,10 @@
 
 namespace Programic\Triggers;
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Expression;
+use Illuminate\Support\Facades\DB;
 
 class MysqlTrigger
 {
@@ -53,9 +55,14 @@ class MysqlTrigger
 
         if ($expression instanceof Expression) {
             $queryString = $expression->getValue();
-        } elseif ($expression instanceof DB) {
+        } elseif (
+            $expression instanceof DB
+            || $expression instanceof QueryBuilder
+            || $expression instanceof EloquentBuilder
+            || method_exists($expression, 'toSql')
+        ) {
             $queryString = $expression->toSql();
-        } elseif ($expression instanceof string) {
+        } elseif (gettype($expression) === 'string') {
             $queryString = $expression;
         } else {
             throw new \Exception('expression has wrong instance');
