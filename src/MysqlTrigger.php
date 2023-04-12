@@ -54,7 +54,7 @@ class MysqlTrigger
         $expression = call_user_func($this->trigger->getStatement());
 
         if ($expression instanceof Expression) {
-            $queryString = $expression->getValue();
+            $queryString = $expression->getValue(DB::connection()->getQueryGrammar());
         } elseif (
             $expression instanceof DB
             || $expression instanceof QueryBuilder
