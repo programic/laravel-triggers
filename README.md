@@ -1,10 +1,10 @@
-# Programic - Automatic task runner
+# Programic - Laravel triggers
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/programic/laravel-triggers.svg?style=flat-square)](https://packagist.org/packages/programic/laravel-triggers)
 ![](https://github.com/programic/laravel-triggers/workflows/Run%20Tests/badge.svg?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/programic/laravel-triggers.svg?style=flat-square)](https://packagist.org/packages/programic/laravel-triggers)
 
-This package allows you to automate tasks as in migrations
+This package allows you to add MySql triggers simplified in migration files.
 
 ### Installation
 This package requires PHP 8.1 (or higher) and Laravel 10.
